@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faded Velvet – Music Production Studio</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #111;
+      --accent: #b88acf; /* soft velvet‑inspired tint */
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: 0.05em;
+    }
+
+    header p {
+      margin: 1rem auto 0;
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    /* AUDIO GRID */
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 2rem clamp(1rem, 4vw, 3rem);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .track-card {
+      position: relative;
+      aspect-ratio: 1 / 1; /* perfect square */
+      background: #ddd;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .track-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .track-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .track-card .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .track-card:hover .play-btn {
+      opacity: 1;
+    }
+
+    .play-btn svg {
+      width: 48px;
+      height: 48px;
+      fill: #fff;
+    }
+
+    audio {
+      display: none; /* hide default controls */
+    }
+
+    /* BOTTOM BANNER */
+    .banner {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      overflow: hidden;
+      border-radius: 0.75rem;
+    }
+
+    .banner img {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Faded Velvet</h1>
+    <p>
+      Crafting immersive soundscapes that blur the line between analog warmth and
+      digital clarity. Explore a selection of our in‑house demos below.
+    </p>
+  </header>
+
+  <section class="tracks">
+    <!-- TRACK 1 -->
+    <figure class="track-card" data-index="0">
+      <img src="images/track1.jpg" alt="Track 1 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track1.mp3"></audio>
+    </figure>
+
+    <!-- TRACK 2 -->
+    <figure class="track-card" data-index="1">
+      <img src="images/track2.jpg" alt="Track 2 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track2.mp3"></audio>
+    </figure>
+
+    <!-- TRACK 3 -->
+    <figure class="track-card" data-index="2">
+      <img src="images/track3.jpg" alt="Track 3 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track3.mp3"></audio>
+    </figure>
+
+    <!-- TRACK 4 -->
+    <figure class="track-card" data-index="3">
+      <img src="images/track4.jpg" alt="Track 4 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track4.mp3"></audio>
+    </figure>
+
+    <!-- TRACK 5 -->
+    <figure class="track-card" data-index="4">
+      <img src="images/track5.jpg" alt="Track 5 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track5.mp3"></audio>
+    </figure>
+
+    <!-- TRACK 6 -->
+    <figure class="track-card" data-index="5">
+      <img src="images/track6.jpg" alt="Track 6 artwork" />
+      <div class="play-btn">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,10 54,32 14,54" />
+        </svg>
+      </div>
+      <audio src="audio/track6.mp3"></audio>
+    </figure>
+  </section>
+
+  <!-- BANNER IMAGE (cropped square) -->
+  <div class="banner">
+    <img src="images/studio-banner.jpg" alt="Faded Velvet Studio Banner" />
+  </div>
+
+  <script>
+    const tracks = document.querySelectorAll(".track-card");
+    let current; // keep track of currently playing audio
+
+    tracks.forEach((card) => {
+      card.addEventListener("click", () => {
+        const audio = card.querySelector("audio");
+
+        // Pause any other playing track
+        if (current && current !== audio) {
+          current.pause();
+          current.currentTime = 0;
+        }
+
+        // Toggle play/pause on selected track
+        if (audio.paused) {
+          audio.play();
+          current = audio;
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          current = null;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
