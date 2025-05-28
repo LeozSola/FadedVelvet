@@ -74,6 +74,7 @@
       position: absolute;
       inset: 0;
       display: flex;
+      flex-direction: column;     /* stack icon + slider */
       align-items: center;
       justify-content: center;
       background: rgba(0, 0, 0, 0.45);
@@ -89,6 +90,12 @@
       width: 48px;
       height: 48px;
       fill: #fff;
+    }
+
+    .play-btn .volume-slider {
+      width: 60%;
+      margin-top: 0.5rem;
+      accent-color: var(--accent);
     }
 
     audio {
@@ -122,15 +129,13 @@
     <!-- TRACK 1 -->
     <figure class="track-card" data-index="0">
       <img src="images/starry.jpg" alt="Track 1 artwork" />
-      <body>
-      <h1>Faded Velvet Music</h1>
       <div class="play-btn">
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/33 Starry .mp3"></audio> 
-      
     </figure>
 
     <!-- TRACK 2 -->
@@ -140,6 +145,7 @@
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/125deluxe.mp3"></audio>
     </figure>
@@ -151,6 +157,7 @@
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/track3.mp3"></audio>
     </figure>
@@ -162,6 +169,7 @@
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/track4.mp3"></audio>
     </figure>
@@ -173,6 +181,7 @@
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/track5.mp3"></audio> 
     </figure>
@@ -184,6 +193,7 @@
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <polygon points="14,10 54,32 14,54" />
         </svg>
+        <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
       </div>
       <audio src="audio/track6.mp3"></audio>
     </figure>
@@ -199,9 +209,21 @@
     let current; // keep track of currently playing audio
 
     tracks.forEach((card) => {
-      card.addEventListener("click", () => {
-        const audio = card.querySelector("audio");
+      const audio = card.querySelector("audio");
+      const slider = card.querySelector(".volume-slider");
 
+      // initialize slider and audio volume
+      slider.value = audio.volume;
+      slider.addEventListener("input", (e) => {
+        audio.volume = e.target.value;
+      });
+
+      // prevent slider clicks from toggling playback
+      slider.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
+      card.addEventListener("click", () => {
         // Pause any other playing track
         if (current && current !== audio) {
           current.pause();
