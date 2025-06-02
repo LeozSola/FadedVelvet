@@ -9,7 +9,7 @@
     :root {
       --bg: #f9f9f9;
       --text: #111;
-      --accent: #b88acf; /* soft velvet‑inspired tint */
+      --accent: #b88acf; /* soft velvet-inspired tint */
     }
 
     html,
@@ -49,6 +49,13 @@
       margin: 0 auto;
     }
 
+    /* New wrapper so slider sits below artwork */
+    .track-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .track-card {
       position: relative;
       aspect-ratio: 1 / 1; /* perfect square */
@@ -58,6 +65,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: transform 0.2s ease;
+      width: 100%;
     }
 
     .track-card:hover {
@@ -74,21 +82,38 @@
       position: absolute;
       inset: 0;
       display: flex;
+      flex-direction: row;        /* slider on left, icon on right */
       align-items: center;
       justify-content: center;
       background: rgb(0, 0, 0, 0.45);
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-
     .track-card:hover .play-btn {
       opacity: 1;
     }
-
+  
     .play-btn svg {
       width: 48px;
       height: 48px;
       fill: #fff;
+    }
+  
+    .play-btn .volume-slider {
+      /* native vertical slider */
+      -webkit-appearance: slider-vertical;
+      writing-mode: bt-lr;
+      width: 50px;
+      height: 60%;
+      margin-right: .5rem;
+      accent-color: var(--accent);
+    }
+
+    /* ---- new progress bar styling ---- */
+    .progress-slider {
+      width: 80%;
+      margin: 0.75rem 0;
+      accent-color: var(--accent);
     }
 
     audio {
@@ -116,102 +141,100 @@
 
     <p>
       Crafting immersive soundscapes that blur the line between analog warmth and
-      digital clarity. Explore a selection of our in‑house demos below.
+      digital clarity. Explore a selection of our in-house demos below.
     </p>
   </header>
 
   <section class="tracks">
     <!-- TRACK 1 -->
-    <figure class="track-card" data-index="0">
-      <img src="images/starry.jpg" alt="Track 1 artwork" />
-      <body>
-      <h1>Faded Velvet Music</h1>
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
-      <audio src="audio/33 Starry .mp3"></audio> 
-      
-    </figure>
+    <div class="track-item" data-index="0">
+      <figure class="track-card">
+        <img src="images/starry.jpg" alt="Track 1 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
+      <audio src="audio/33 Starry .mp3"></audio>
+    </div>
 
     <!-- TRACK 2 -->
-    <figure class="track-card" data-index="1"> 
-      <img src="images/2deluxe.jpg" alt="Track 2 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
+    <div class="track-item" data-index="1">
+      <figure class="track-card">
+        <img src="images/2deluxe.jpg" alt="Track 2 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
       <audio src="audio/125deluxe.mp3"></audio>
-    </figure>
+    </div>
 
     <!-- TRACK 3 -->
-    <figure class="track-card" data-index="2">
-      <img src="images/2bdeluxe.jpg" alt="Track 3 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
+    <div class="track-item" data-index="2">
+      <figure class="track-card">
+        <img src="images/2bdeluxe.jpg" alt="Track 3 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
       <audio src="audio/track3.mp3"></audio>
-    </figure>
+    </div>
 
     <!-- TRACK 4 -->
-    <figure class="track-card" data-index="3">
-      <img src="images/track4.jpg" alt="Track 4 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
+    <div class="track-item" data-index="3">
+      <figure class="track-card">
+        <img src="images/track4.jpg" alt="Track 4 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
       <audio src="audio/track4.mp3"></audio>
-    </figure>
+    </div>
 
     <!-- TRACK 5 -->
-    <figure class="track-card" data-index="4">
-      <img src="images/track5.jpg" alt="Track 5 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
-      <audio src="audio/track5.mp3"></audio> 
-    </figure>
+    <div class="track-item" data-index="4">
+      <figure class="track-card">
+        <img src="images/track5.jpg" alt="Track 5 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
+      <audio src="audio/track5.mp3"></audio>
+    </div>
 
     <!-- TRACK 6 -->
-    <figure class="track-card" data-index="5">
-      <img src="images/track6.jpg" alt="Track 6 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
+    <div class="track-item" data-index="5">
+      <figure class="track-card">
+        <img src="images/track6.jpg" alt="Track 6 artwork" />
+        <div class="play-btn">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" />
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,10 54,32 14,54" />
+          </svg>
+        </div>
+      </figure>
+      <input type="range" class="progress-slider" min="0" max="1" step="0.01" />
       <audio src="audio/track6.mp3"></audio>
     </figure>
-
-    <!-- TRACK 7 -->
-    <figure class="track-card" data-index="5">
-      <img src="images/track7.jpg" alt="Track 7 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
-      <audio src="audio/track7.mp3"></audio>
-    </figure>
-
-    <!-- TRACK 8 -->
-    <figure class="track-card" data-index="5">
-      <img src="images/track8.jpg" alt="Track 8 artwork" />
-      <div class="play-btn">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="14,10 54,32 14,54" />
-        </svg>
-      </div>
-      <audio src="audio/track8.mp3"></audio>
-    </figure>
-
   </section>
 
   <!-- BANNER IMAGE (cropped square) -->
@@ -220,27 +243,40 @@
   </div>
 
   <script>
-    const tracks = document.querySelectorAll(".track-card");
-    let current; // keep track of currently playing audio
+    const items = document.querySelectorAll(".track-item");
+    let currentAudio;
 
-    tracks.forEach((card) => {
+    items.forEach((item) => {
+      const card = item.querySelector(".track-card");
+      const audio = item.querySelector("audio");
+      const volSlider = item.querySelector(".volume-slider");
+      const progSlider = item.querySelector(".progress-slider");
+
+      // volume controls
+      volSlider.value = audio.volume;
+      volSlider.addEventListener("input", e => audio.volume = e.target.value);
+      volSlider.addEventListener("click", e => e.stopPropagation());
+
+      // progress bar setup
+      audio.addEventListener("loadedmetadata", () => progSlider.max = audio.duration);
+      audio.addEventListener("timeupdate", () => progSlider.value = audio.currentTime);
+      progSlider.addEventListener("input", e => audio.currentTime = e.target.value);
+
+      // clicking the artwork toggles playback
       card.addEventListener("click", () => {
-        const audio = card.querySelector("audio");
-
-        // Pause any other playing track
-        if (current && current !== audio) {
-          current.pause();
-          current.currentTime = 0;
+        // if switching tracks, reset the previous one
+        if (currentAudio && currentAudio !== audio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
         }
 
-        // Toggle play/pause on selected track
         if (audio.paused) {
           audio.play();
-          current = audio;
+          currentAudio = audio;
         } else {
           audio.pause();
-          audio.currentTime = 0;
-          current = null;
+          // no resetting currentTime here → resume possible
+          currentAudio = null;
         }
       });
     });
